@@ -1,0 +1,11 @@
+# Folders
+node_modules/
+dist/
+build/
+
+# File Types
+.DS_Store
+.code-workspace
+
+# Specific Files
+secrets.json
