@@ -1,0 +1,15 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.styleless-container {
+  border: 0.2rem solid $black;
+  color: $black;
+  background: lightblue;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+}

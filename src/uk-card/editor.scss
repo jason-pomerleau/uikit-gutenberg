@@ -1,0 +1,19 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+ .uk-card {
+  border: 0.2rem solid $black;
+  background: white;
+  color: $black;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem;
+
+  h2 {
+    border-bottom: 2px solid rgba(0, 0, 0, .4);
+  }
+}
