@@ -13,6 +13,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { InspectorControls, InnerBlocks } = wp.editor;
 const {
+	SelectControl,
     PanelBody,
     PanelRow,
 	RadioControl
@@ -42,8 +43,25 @@ registerBlockType( 'cgb/styleless-container-block', {
 		__( 'container' ),
 	],
 	attributes: {
+		width_x: {
+			default: '',
+			width_x: ''
+		},
+		width_y: {
+			default: '',
+			width_y: ''
+		},
+		width_class: {
+			default: '',
+			width_class: ''
+		},
 		marginRadio: {
+			default: '',
 			marginRadio: 0
+		},
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 	},
 
@@ -57,8 +75,77 @@ registerBlockType( 'cgb/styleless-container-block', {
 	 */
 	edit: function( props ) {
 		return [
-			//.uk-margin-medium
+			
+			
+			
+			// if x and y are both filled in, set the class
+			// if either of them arent filled in set the class to nothing
+
+
+
+
+
+
+
 			<InspectorControls>
+				{/* ##########DEFAULT CONTROLS########## */}
+				{/* WIDTH */}
+				<PanelBody
+					title={ __( 'Set width?', 'styleless-container-block' ) }
+				>
+					<h4>uk-width-</h4>
+					<PanelRow>
+						<SelectControl 
+							label='X'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: '1', value: '1' },
+									{ label: '2', value: '2' },
+									{ label: '3', value: '3' },
+									{ label: '4', value: '4' },
+									{ label: '5', value: '5' },
+									{ label: '6', value: '6' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { width_x: value } );
+								if(value != '' && props.attributes.width_y != '') {
+									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_y}` } );
+								} else if(value == '' || props.attributes.width_y == '') {
+									props.setAttributes( { width_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.width_x}
+						/>
+					</PanelRow>
+					<h4>of</h4>
+					<PanelRow>
+						<SelectControl 
+							label='Y'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: '1', value: '1' },
+									{ label: '2', value: '2' },
+									{ label: '3', value: '3' },
+									{ label: '4', value: '4' },
+									{ label: '5', value: '5' },
+									{ label: '6', value: '6' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { width_y: value } );
+								if(value != '' && props.attributes.width_x != '') {
+									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_x}` } );
+								} else if(value == '' || props.attributes.width_x == '') {
+									props.setAttributes( { width_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.width_y}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* MARGIN */}
 				<PanelBody
 					title={ __( 'Add margin?', 'styleless-container-block' ) }
 				>
@@ -71,14 +158,37 @@ registerBlockType( 'cgb/styleless-container-block', {
 									{ label: 'Medium', value: 'uk-margin-medium' },
 									{ label: 'Large', value: 'uk-margin-large' },
 									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
 								]}
 							onChange={( value ) => {
 								props.setAttributes( { marginRadio: value } );
-							}}							
+							}}
+							
 							selected={props.attributes.marginRadio}
 						/>
 					</PanelRow>
 				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'styleless-container-block' ) } >
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+				{/* ################################### */}
 			</InspectorControls>,
 			<div className={ 'styleless-container' }>
 				<InnerBlocks />
@@ -95,10 +205,18 @@ registerBlockType( 'cgb/styleless-container-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	save: function( props ) {
-		return (
-			<div className={`styleless-container ${props.attributes.marginRadio}`}>
-				<InnerBlocks.Content />
-			</div>
-		);
+		// if(props.attributes.width_x && props.attributes.width_y) {
+		// 	return (
+		// 		<div className={`styleless-container ${props.attributes.textAlign} ${props.attributes.marginRadio} uk-width-${props.attributes.width_x}-${props.attributes.width_y}`}>
+		// 			<InnerBlocks.Content />
+		// 		</div>
+		// 	);
+		// } else {
+			return (
+				<div className={`styleless-container ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class}`}>
+					<InnerBlocks.Content />
+				</div>
+			);
+		// }
 	},
 } );

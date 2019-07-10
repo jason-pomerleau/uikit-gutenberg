@@ -44,6 +44,14 @@ registerBlockType( 'cgb/uk-grid-block', {
 		__( 'grid' ),
 	],
 	attributes: {
+		specifyChildWidth: {
+			default: 'no',
+			specifyChildWidth: ''
+		},
+		childWidthClass: {
+			default: '',
+			childWidthClass: ''
+		},
 		largeGridWidth: {
 			default: 4,
 			largeGridWidth: 4
@@ -61,7 +69,10 @@ registerBlockType( 'cgb/uk-grid-block', {
 			gridAttribute: ''
 		},
 
-
+		marginRadio: {
+			default: '',
+			marginRadio: ''
+		},
 		textAlign: {
 			default: '',
 			textAlign: ''
@@ -79,21 +90,46 @@ registerBlockType( 'cgb/uk-grid-block', {
 	 */
 	edit: function( props ) {
 
-		const largeGridWidth = newWidth => props.setAttributes({largeGridWidth: newWidth});
-		const medGridWidth = newWidth => props.setAttributes({medGridWidth: newWidth});
-		const smallGridWidth = newWidth => props.setAttributes({smallGridWidth: newWidth});
-
 		return [
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'Grid Children Width Sizes', 'uk-grid-block' ) }
 				>
 					<PanelRow>
+					<RadioControl 
+							label='Do you want child width sizes specified?'
+							options={[
+									{ label: 'No', value: 'no' },
+									{ label: 'Yes', value: 'yes' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { specifyChildWidth: value } );
+
+								// if its true, create the class of all the child widths
+								if(props.attributes.specifyChildWidth == 'no') {
+									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
+								} else if(props.attributes.specifyChildWidth == 'yes') {
+									props.setAttributes( { childWidthClass: ''} );
+								}
+							}}
+							
+							selected={props.attributes.specifyChildWidth}
+						/>
+					</PanelRow>
+					<PanelRow>
 						<RangeControl
 							label="Desktop Grid Children Width" 
 							min={2}
 							max={6}
-							onChange={largeGridWidth}
+							onChange={( value ) => {
+								props.setAttributes( { largeGridWidth: value } );
+								if(props.attributes.specifyChildWidth == 'yes') {
+									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${value}@l uk-grid` } );
+								} else if(props.attributes.specifyChildWidth == 'no') {
+									props.setAttributes( { childWidthClass: ''} );
+								}
+							}}
+
 							value={props.attributes.largeGridWidth}
 						/>
 					</PanelRow>
@@ -102,7 +138,14 @@ registerBlockType( 'cgb/uk-grid-block', {
 							label="Tablet Grid Children Width" 
 							min={1}
 							max={4}
-							onChange={medGridWidth}
+							onChange={( value ) => {
+								props.setAttributes( { medGridWidth: value } );
+								if(props.attributes.specifyChildWidth == 'yes') {
+									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${value}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
+								} else if(props.attributes.specifyChildWidth == 'no') {
+									props.setAttributes( { childWidthClass: ''} );
+								}
+							}}
 							value={props.attributes.medGridWidth}
 						/>
 					</PanelRow>
@@ -111,7 +154,14 @@ registerBlockType( 'cgb/uk-grid-block', {
 							label="Mobile Grid Children Width" 
 							min={1}
 							max={3}
-							onChange={smallGridWidth}
+							onChange={( value ) => {
+								props.setAttributes( { smallGridWidth: value } );
+								if(props.attributes.specifyChildWidth == 'yes') {
+									props.setAttributes( { childWidthClass: `uk-child-width-1-${value}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
+								} else if(props.attributes.specifyChildWidth == 'no') {
+									props.setAttributes( { childWidthClass: ''} );
+								}
+							}}
 							value={props.attributes.smallGridWidth}
 						/>
 					</PanelRow>
@@ -136,9 +186,34 @@ registerBlockType( 'cgb/uk-grid-block', {
 				</PanelBody>
 
 
+				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* MARGIN */}
 				<PanelBody
-					title={ __( 'Text Align', 'uk-grid-block' ) }
+					title={ __( 'Add margin?', 'uk-grid-block' ) }
 				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick a margin setting'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 'uk-margin-small' },
+									{ label: 'Medium', value: 'uk-margin-medium' },
+									{ label: 'Large', value: 'uk-margin-large' },
+									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { marginRadio: value } );
+							}}
+							
+							selected={props.attributes.marginRadio}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'uk-grid-block' ) } >
 					<PanelRow>
 						<RadioControl 
 							label='Pick an alignment'
@@ -156,6 +231,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+				{/* ################################### */}
 
 			</InspectorControls>,
 			<div className={ 'uk-grid' }>
@@ -175,7 +251,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 	 */
 	save: function( props ) {
 		return (
-			<div className={ `${props.attributes.textAlign} uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } uk-grid={`${props.attributes.gridAttribute}`}>
+			<div className={ `${props.attributes.marginRadio} ${props.attributes.textAlign} ${props.attributes.childWidthClass}` } uk-grid={`${props.attributes.gridAttribute}`}>
 				<InnerBlocks.Content />
 		   	</div>
 		);

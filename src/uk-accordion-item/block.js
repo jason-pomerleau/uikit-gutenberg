@@ -55,6 +55,15 @@ registerBlockType( 'cgb/uk-accordion-item-block', {
 			type: 'html',
 			multiline: 'p',
 			selector: '.uk-card-boody',
+		},
+
+		marginRadio: {
+			default: '',
+			marginRadio: ''
+		},
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 	},
 
@@ -72,7 +81,6 @@ registerBlockType( 'cgb/uk-accordion-item-block', {
 		const onChangeContent = newContent => props.setAttributes({content: newContent});
 
 		return [
-			//.uk-margin-medium
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'Accordion Settings', 'uk-accordion-item-block' ) }
@@ -91,6 +99,52 @@ registerBlockType( 'cgb/uk-accordion-item-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* MARGIN */}
+				<PanelBody
+					title={ __( 'Add margin?', 'uk-accordion-container-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick a margin setting'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 'uk-margin-small' },
+									{ label: 'Medium', value: 'uk-margin-medium' },
+									{ label: 'Large', value: 'uk-margin-large' },
+									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { marginRadio: value } );
+							}}
+							
+							selected={props.attributes.marginRadio}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'uk-accordion-item-block' ) } >
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+				{/* ################################### */}
 			</InspectorControls>,
 			<li className={ 'uk-accordion-item' }>
 				<div>
@@ -123,7 +177,7 @@ registerBlockType( 'cgb/uk-accordion-item-block', {
 	 */
 	save: function( props ) {
 		return (
-			<li className={`${props.attributes.isOpen}`}>
+			<li className={`${props.attributes.isOpen} ${props.attributes.textAlign} ${props.attributes.marginRadio}`}>
 				<a class="uk-accordion-title" href="#">{props.attributes.title}</a>
 				<div class="uk-accordion-content">
 					<p>{props.attributes.content}</p>

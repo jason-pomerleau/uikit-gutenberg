@@ -45,6 +45,10 @@ registerBlockType( 'cgb/uk-container-block', {
 		marginRadio: {
 			default: '',
 			marginRadio: ''
+		},
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 	},
 
@@ -60,8 +64,9 @@ registerBlockType( 'cgb/uk-container-block', {
 		return [
 			//.uk-margin-medium
 			<InspectorControls>
+				{/* ##########DEFAULT CONTROLS########## */}
 				<PanelBody
-					title={ __( 'Add margin?', 'uk-grid-block' ) }
+					title={ __( 'Add margin?', 'uk-container-block' ) }
 				>
 					<PanelRow>
 						<RadioControl 
@@ -72,14 +77,37 @@ registerBlockType( 'cgb/uk-container-block', {
 									{ label: 'Medium', value: 'uk-margin-medium' },
 									{ label: 'Large', value: 'uk-margin-large' },
 									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
 								]}
 							onChange={( value ) => {
 								props.setAttributes( { marginRadio: value } );
-							}}							
+							}}
+
 							selected={props.attributes.marginRadio}
 						/>
 					</PanelRow>
 				</PanelBody>
+
+				
+				<PanelBody title={ __( 'Text Align', 'uk-container-block' ) } >
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+				{/* ################################### */}
 			</InspectorControls>,
 			<div className={ 'uk-container' }>
 				<InnerBlocks />
@@ -97,7 +125,7 @@ registerBlockType( 'cgb/uk-container-block', {
 	 */
 	save: function( props ) {
 		return (
-			<div className={`uk-container ${props.attributes.marginRadio}`}>
+			<div className={`uk-container ${props.attributes.marginRadio} ${props.attributes.textAlign}`}>
 				<InnerBlocks.Content />
 			</div>
 		);

@@ -4,7 +4,7 @@ UIkit Gutenberg Blocks
 
 #Block Standard Behavior
 
-width: uk-width-X of X
-margin: uk-margin-auto
-text alignment: right center left justify
-uk-cover
+Display: none
+width: uk-width- X of X
+Margin: none, small, medium, large, Xlarge, auto
+text alignment: right, center, left, justify

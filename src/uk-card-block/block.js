@@ -54,6 +54,10 @@ registerBlockType( 'cgb/uk-card-block', {
 			selector: '.uk-card-boody',
 		},
 
+		marginRadio: {
+			default: '',
+			marginRadio: ''
+		},
 		textAlign: {
 			default: '',
 			textAlign: ''
@@ -74,7 +78,34 @@ registerBlockType( 'cgb/uk-card-block', {
 		const onChangeContent = newContent => props.setAttributes({content: newContent});
 		return [
 			<InspectorControls>
-				<PanelBody title={ __( 'Text Align', 'uk-grid-block' ) } >
+				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* MARGIN */}
+				<PanelBody
+					title={ __( 'Add margin?', 'uk-card-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick a margin setting'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 'uk-margin-small' },
+									{ label: 'Medium', value: 'uk-margin-medium' },
+									{ label: 'Large', value: 'uk-margin-large' },
+									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { marginRadio: value } );
+							}}
+							
+							selected={props.attributes.marginRadio}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'uk-card-block' ) } >
 					<PanelRow>
 						<RadioControl 
 							label='Pick an alignment'
@@ -92,6 +123,7 @@ registerBlockType( 'cgb/uk-card-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+				{/* ################################### */}
 			</InspectorControls>,
 
 			<div className={'uk-card'}>
@@ -124,7 +156,7 @@ registerBlockType( 'cgb/uk-card-block', {
 	save: function( props ) {
 		return (
 			<div>
-				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign}` }>
+				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign} ${props.attributes.marginRadio}` }>
 					<div>
 						<div className={"uk-card-title"}>
 							{ props.attributes.title }

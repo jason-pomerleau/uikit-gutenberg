@@ -1,5 +1,6 @@
 // THE DEFAULT/STANDARD UIKIT BLOCK
 // Duplicate this code and make your new block
+// Doesn't come with any styles
 
 //  Import CSS.
 import './style.scss';
@@ -28,6 +29,10 @@ registerBlockType( 'cgb/default-uikit-block', {
 		textAlign: {
 			default: '',
 			textAlign: ''
+		},
+		marginRadio: {
+			default: '',
+			marginRadio: ''
 		}
 	},
 
@@ -37,7 +42,33 @@ registerBlockType( 'cgb/default-uikit-block', {
 			
 			<InspectorControls>
 				{/* ##########DEFAULT CONTROLS########## */}
-				<PanelBody title={ __( 'Text Align', 'uk-grid-block' ) } >
+
+				{/* MARGIN */}
+				<PanelBody
+					title={ __( 'Add margin?', 'default-uikit-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick a margin setting'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 'uk-margin-small' },
+									{ label: 'Medium', value: 'uk-margin-medium' },
+									{ label: 'Large', value: 'uk-margin-large' },
+									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { marginRadio: value } );
+							}}
+							
+							selected={props.attributes.marginRadio}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'default-uikit-block' ) } >
 					<PanelRow>
 						<RadioControl 
 							label='Pick an alignment'

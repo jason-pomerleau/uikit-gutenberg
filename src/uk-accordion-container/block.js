@@ -45,6 +45,15 @@ registerBlockType( 'uikit-gutenberg/uk-accordion-container-block', {
 		accordionSetting: {
 			default: '',
 			accordionSetting: ''
+		},
+
+		marginRadio: {
+			default: '',
+			marginRadio: ''
+		},
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 	},
 
@@ -81,9 +90,57 @@ registerBlockType( 'uikit-gutenberg/uk-accordion-container-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+
+				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* MARGIN */}
+				<PanelBody
+					title={ __( 'Add margin?', 'uk-accordion-container-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick a margin setting'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 'uk-margin-small' },
+									{ label: 'Medium', value: 'uk-margin-medium' },
+									{ label: 'Large', value: 'uk-margin-large' },
+									{ label: 'Extra Large', value: 'uk-margin-xlarge' },
+									{ label: 'Auto (Horizontally Center)', value: 'uk-margin-auto' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { marginRadio: value } );
+							}}
+							
+							selected={props.attributes.marginRadio}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* TEXT ALIGN */}
+				<PanelBody title={ __( 'Text Align', 'uk-accordion-container-block' ) } >
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+				{/* ################################### */}
 			</InspectorControls>,
 			<ul className={ 'uk-accordion-container' }>
-				<p>Place uk accordion item blocks in here.</p>
+				<p className={`directions`}>Place uk accordion item blocks in here.</p>
 				<InnerBlocks />
 			</ul>
 		];
@@ -99,7 +156,7 @@ registerBlockType( 'uikit-gutenberg/uk-accordion-container-block', {
 	 */
 	save: function( props ) {
 		return (
-			<ul uk-accordion={props.attributes.accordionSetting}>
+			<ul className={`${props.attributes.marginRadio} ${props.attributes.textAlign}`} uk-accordion={props.attributes.accordionSetting}>
 				<InnerBlocks.Content />
 			</ul>
 		);
