@@ -54,6 +54,18 @@ registerBlockType( 'cgb/uk-card-block', {
 			selector: '.uk-card-boody',
 		},
 
+		width_x: {
+			default: '',
+			width_x: ''
+		},
+		width_y: {
+			default: '',
+			width_y: ''
+		},
+		width_class: {
+			default: '',
+			width_class: ''
+		},
 		marginRadio: {
 			default: '',
 			marginRadio: ''
@@ -79,6 +91,62 @@ registerBlockType( 'cgb/uk-card-block', {
 		return [
 			<InspectorControls>
 				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* WIDTH */}
+				<PanelBody
+					title={ __( 'Set width?', 'uk-card-block' ) }
+				>
+					<h4>uk-width-</h4>
+					<PanelRow>
+						<SelectControl 
+							label='X'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: '1', value: '1' },
+									{ label: '2', value: '2' },
+									{ label: '3', value: '3' },
+									{ label: '4', value: '4' },
+									{ label: '5', value: '5' },
+									{ label: '6', value: '6' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { width_x: value } );
+								if(value != '' && props.attributes.width_y != '') {
+									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_y}` } );
+								} else if(value == '' || props.attributes.width_y == '') {
+									props.setAttributes( { width_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.width_x}
+						/>
+					</PanelRow>
+					<h4>of</h4>
+					<PanelRow>
+						<SelectControl 
+							label='Y'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: '1', value: '1' },
+									{ label: '2', value: '2' },
+									{ label: '3', value: '3' },
+									{ label: '4', value: '4' },
+									{ label: '5', value: '5' },
+									{ label: '6', value: '6' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { width_y: value } );
+								if(value != '' && props.attributes.width_x != '') {
+									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_x}` } );
+								} else if(value == '' || props.attributes.width_x == '') {
+									props.setAttributes( { width_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.width_y}
+						/>
+					</PanelRow>
+				</PanelBody>
 
 				{/* MARGIN */}
 				<PanelBody
@@ -156,7 +224,7 @@ registerBlockType( 'cgb/uk-card-block', {
 	save: function( props ) {
 		return (
 			<div>
-				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign} ${props.attributes.marginRadio}` }>
+				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class}` }>
 					<div>
 						<div className={"uk-card-title"}>
 							{ props.attributes.title }
