@@ -43,6 +43,18 @@ registerBlockType( 'cgb/styleless-container-block', {
 		__( 'container' ),
 	],
 	attributes: {
+		visibility_verb: {
+			default: '',
+			visibility_verb: ''
+		},
+		visibility_size: {
+			default: '',
+			visibility_size: ''
+		},
+		visibility_class: {
+			default: '',
+			visibility_class: ''
+		},
 		width_x: {
 			default: '',
 			width_x: ''
@@ -75,20 +87,60 @@ registerBlockType( 'cgb/styleless-container-block', {
 	 */
 	edit: function( props ) {
 		return [
-			
-			
-			
-			// if x and y are both filled in, set the class
-			// if either of them arent filled in set the class to nothing
-
-
-
-
-
-
 
 			<InspectorControls>
 				{/* ##########DEFAULT CONTROLS########## */}
+				{/* VISIBILITY */}
+				<PanelBody
+					title={ __( 'Set visibility?', 'styleless-container-block' ) }
+				>
+					<h4>uk-visibility-</h4>
+					<PanelRow>
+						<SelectControl 
+							label='Choose visibility type:'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Hidden', value: 'hidden' },
+									{ label: 'Visible', value: 'visible' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_verb: value } );
+								if(value != '' && visibility_size != '') {
+									props.setAttributes( { visibility_class: `uk-${value}@${props.attributes.visibility_size}` } );
+								} else if(value == '' || props.attributes.visibility_size == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_verb}
+						/>
+					</PanelRow>
+					<h4>@</h4>
+					<PanelRow>
+						<SelectControl 
+							label='at'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 's' },
+									{ label: 'Medium', value: 'm' },
+									{ label: 'Large', value: 'l' },
+									{ label: 'XLarge', value: 'xl' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_size: value } );
+								if(value != '' && props.attributes.visibility_verb != '') {
+									props.setAttributes( { visibility_class: `uk-${props.attributes.visibility_verb}@${value}` } );
+								} else if(value == '' || props.attributes.visibility_verb == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_size}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+
 				{/* WIDTH */}
 				<PanelBody
 					title={ __( 'Set width?', 'styleless-container-block' ) }
@@ -134,7 +186,7 @@ registerBlockType( 'cgb/styleless-container-block', {
 							onChange={( value ) => {
 								props.setAttributes( { width_y: value } );
 								if(value != '' && props.attributes.width_x != '') {
-									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_x}` } );
+									props.setAttributes( { width_class: `uk-width-${props.attributes.width_x}-${value}` } );
 								} else if(value == '' || props.attributes.width_x == '') {
 									props.setAttributes( { width_class: '' } );
 								}
@@ -213,7 +265,7 @@ registerBlockType( 'cgb/styleless-container-block', {
 		// 	);
 		// } else {
 			return (
-				<div className={`styleless-container ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class}`}>
+				<div className={`styleless-container ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class} ${props.attributes.visibility_class}`}>
 					<InnerBlocks.Content />
 				</div>
 			);

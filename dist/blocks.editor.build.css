@@ -148,3 +148,24 @@
   padding: 2rem; }
   .uk-card h2 {
     border-bottom: 2px solid rgba(0, 0, 0, 0.4); }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.uk-lightbox {
+  background: lightgreen;
+  border: 1px solid grey; }

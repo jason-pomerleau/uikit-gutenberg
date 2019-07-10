@@ -14,6 +14,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 import { InnerBlocks } from '@wordpress/editor'; // inner blocks
 const { InspectorControls } = wp.editor;
 const {
+	SelectControl,
     PanelBody,
     PanelRow,
 	RadioControl,
@@ -69,6 +70,18 @@ registerBlockType( 'cgb/uk-grid-block', {
 			gridAttribute: ''
 		},
 
+		visibility_verb: {
+			default: '',
+			visibility_verb: ''
+		},
+		visibility_size: {
+			default: '',
+			visibility_size: ''
+		},
+		visibility_class: {
+			default: '',
+			visibility_class: ''
+		},
 		marginRadio: {
 			default: '',
 			marginRadio: ''
@@ -187,6 +200,56 @@ registerBlockType( 'cgb/uk-grid-block', {
 
 
 				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* VISIBILITY */}
+				<PanelBody
+					title={ __( 'Set visibility?', 'default-uikit-block' ) }
+				>
+					<h4>uk-visibility-</h4>
+					<PanelRow>
+						<SelectControl 
+							label='Choose visibility type:'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Hidden', value: 'hidden' },
+									{ label: 'Visible', value: 'visible' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_verb: value } );
+								if(value != '' && visibility_size != '') {
+									props.setAttributes( { visibility_class: `uk-${value}@${props.attributes.visibility_size}` } );
+								} else if(value == '' || props.attributes.visibility_size == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_verb}
+						/>
+					</PanelRow>
+					<h4>@</h4>
+					<PanelRow>
+						<SelectControl 
+							label='at'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 's' },
+									{ label: 'Medium', value: 'm' },
+									{ label: 'Large', value: 'l' },
+									{ label: 'XLarge', value: 'xl' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_size: value } );
+								if(value != '' && props.attributes.visibility_verb != '') {
+									props.setAttributes( { visibility_class: `uk-${props.attributes.visibility_verb}@${value}` } );
+								} else if(value == '' || props.attributes.visibility_verb == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_size}
+						/>
+					</PanelRow>
+				</PanelBody>
 
 				{/* MARGIN */}
 				<PanelBody

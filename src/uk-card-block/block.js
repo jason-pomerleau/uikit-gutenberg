@@ -13,6 +13,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { RichText, InspectorControls } = wp.editor;
 const {
+	SelectControl,
     PanelBody,
     PanelRow,
 	RadioControl
@@ -54,6 +55,18 @@ registerBlockType( 'cgb/uk-card-block', {
 			selector: '.uk-card-boody',
 		},
 
+		visibility_verb: {
+			default: '',
+			visibility_verb: ''
+		},
+		visibility_size: {
+			default: '',
+			visibility_size: ''
+		},
+		visibility_class: {
+			default: '',
+			visibility_class: ''
+		},
 		width_x: {
 			default: '',
 			width_x: ''
@@ -91,6 +104,56 @@ registerBlockType( 'cgb/uk-card-block', {
 		return [
 			<InspectorControls>
 				{/* ##########DEFAULT CONTROLS########## */}
+
+				{/* VISIBILITY */}
+				<PanelBody
+					title={ __( 'Set visibility?', 'uk-container-block' ) }
+				>
+					<h4>uk-visibility-</h4>
+					<PanelRow>
+						<SelectControl 
+							label='Choose visibility type:'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Hidden', value: 'hidden' },
+									{ label: 'Visible', value: 'visible' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_verb: value } );
+								if(value != '' && visibility_size != '') {
+									props.setAttributes( { visibility_class: `uk-${value}@${props.attributes.visibility_size}` } );
+								} else if(value == '' || props.attributes.visibility_size == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_verb}
+						/>
+					</PanelRow>
+					<h4>@</h4>
+					<PanelRow>
+						<SelectControl 
+							label='at'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Small', value: 's' },
+									{ label: 'Medium', value: 'm' },
+									{ label: 'Large', value: 'l' },
+									{ label: 'XLarge', value: 'xl' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { visibility_size: value } );
+								if(value != '' && props.attributes.visibility_verb != '') {
+									props.setAttributes( { visibility_class: `uk-${props.attributes.visibility_verb}@${value}` } );
+								} else if(value == '' || props.attributes.visibility_verb == '') {
+									props.setAttributes( { visibility_class: '' } );
+								}
+							}}
+							
+							value={props.attributes.visibility_size}
+						/>
+					</PanelRow>
+				</PanelBody>
 
 				{/* WIDTH */}
 				<PanelBody
@@ -137,7 +200,7 @@ registerBlockType( 'cgb/uk-card-block', {
 							onChange={( value ) => {
 								props.setAttributes( { width_y: value } );
 								if(value != '' && props.attributes.width_x != '') {
-									props.setAttributes( { width_class: `uk-width-${value}-${props.attributes.width_x}` } );
+									props.setAttributes( { width_class: `uk-width-${props.attributes.width_x}-${value}` } );
 								} else if(value == '' || props.attributes.width_x == '') {
 									props.setAttributes( { width_class: '' } );
 								}
@@ -224,7 +287,7 @@ registerBlockType( 'cgb/uk-card-block', {
 	save: function( props ) {
 		return (
 			<div>
-				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class}` }>
+				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign} ${props.attributes.marginRadio} ${props.attributes.width_class} ${props.attributes.visibility_class}` }>
 					<div>
 						<div className={"uk-card-title"}>
 							{ props.attributes.title }
