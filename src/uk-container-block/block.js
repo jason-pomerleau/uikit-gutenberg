@@ -43,7 +43,8 @@ registerBlockType( 'cgb/uk-container-block', {
 	],
 	attributes: {
 		marginRadio: {
-			marginRadio: 0
+			default: '',
+			marginRadio: ''
 		}
 	},
 

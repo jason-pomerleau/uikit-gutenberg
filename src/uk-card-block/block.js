@@ -11,7 +11,13 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { RichText } = wp.editor;
+const { RichText, InspectorControls } = wp.editor;
+const {
+    PanelBody,
+    PanelRow,
+	RadioControl
+} = wp.components;
+
 
 /**
  * Register: aa Gutenberg Block.
@@ -46,6 +52,11 @@ registerBlockType( 'cgb/uk-card-block', {
 			type: 'html',
 			multiline: 'p',
 			selector: '.uk-card-boody',
+		},
+
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 	},
 
@@ -61,7 +72,28 @@ registerBlockType( 'cgb/uk-card-block', {
 		const onChangeTitle = newTitle => props.setAttributes({title: newTitle});
 		
 		const onChangeContent = newContent => props.setAttributes({content: newContent});
-		return (
+		return [
+			<InspectorControls>
+				<PanelBody title={ __( 'Text Align', 'uk-grid-block' ) } >
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+			</InspectorControls>,
+
 			<div className={'uk-card'}>
 				<RichText
 					tagName="div"
@@ -78,7 +110,7 @@ registerBlockType( 'cgb/uk-card-block', {
 					value={ props.attributes.content }
 				/>
 			</div>
-		);
+		];
 	},
 
 	/**
@@ -92,7 +124,7 @@ registerBlockType( 'cgb/uk-card-block', {
 	save: function( props ) {
 		return (
 			<div>
-				<div className={ 'uk-card uk-card-default uk-card-body' }>
+				<div className={ `uk-card uk-card-default uk-card-body ${props.attributes.textAlign}` }>
 					<div>
 						<div className={"uk-card-title"}>
 							{ props.attributes.title }

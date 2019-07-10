@@ -11,7 +11,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { InspectorControls, InnerBlocks } = wp.editor;
+const { InspectorControls, InnerBlocks, RichText } = wp.editor;
 const {
     PanelBody,
     PanelRow,
@@ -31,19 +31,30 @@ const {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/uk-accordion-container-block', {
+registerBlockType( 'cgb/uk-accordion-item-block', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'uk-container-block' ), // Block title.
+	title: __( 'uk-accordion-item-block' ), // Block title.
 	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'uk', 'UK' ),
 		__( 'Test' ),
-		__( 'container' ),
+		__( 'accordion', 'container' ),
 	],
 	attributes: {
-		marginRadio: {
-			marginRadio: 0
+		isOpen: {
+			default: '',
+			isOpen: ''
+		},
+		title: {
+			type: 'string',
+			multiline: 'h2',
+			selector: '.uk-card-title',
+		},
+		content: {
+			type: 'html',
+			multiline: 'p',
+			selector: '.uk-card-boody',
 		}
 	},
 
@@ -56,32 +67,49 @@ registerBlockType( 'cgb/uk-accordion-container-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
+
+		const onChangeTitle = newTitle => props.setAttributes({title: newTitle});
+		const onChangeContent = newContent => props.setAttributes({content: newContent});
+
 		return [
 			//.uk-margin-medium
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Accordion Settings', 'uk-accordion-container-block' ) }
+					title={ __( 'Accordion Settings', 'uk-accordion-item-block' ) }
 				>
 					<PanelRow>
 						<RadioControl 
-							label='Pick an accordion setting (descriptions on UIkit website)'
+							label='Do you want this item to be open?'
 							options={[
-									{ label: 'None', value: '' },
-									{ label: 'No collapsing', value: 'collapsible: false' },
-									{ label: 'Muptiple open items', value: 'multiple: true' },
+									{ label: 'No', value: '' },
+									{ label: 'Yes', value: 'uk-open' },
 								]}
 							onChange={( value ) => {
-								props.setAttributes( { marginRadio: value } );
+								props.setAttributes( { isOpen: value } );
 							}}							
-							selected={props.attributes.marginRadio}
+							selected={props.attributes.isOpen}
 						/>
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>,
-			<ul className={ 'uk-accordion-container' }>
-				<p>Place uk accordion item blocks in here.</p>
-				<InnerBlocks />
-			</ul>
+			<li className={ 'uk-accordion-item' }>
+				<div>
+					<RichText
+						tagName="div"
+						multiline="h2"
+						placeholder={ __( 'Add your custom title', 'uk-accordion-item-block') }
+						onChange={ onChangeTitle }
+						value={ props.attributes.title }
+					/>
+					<RichText
+						tagName="div"
+						multiline=""
+						placeholder={ __( 'Add your custom content', 'uk-accordion-item-block' ) }
+						onChange={ onChangeContent }
+						value={ props.attributes.content }
+					/>
+				</div>
+			</li>
 		];
 	},
 
@@ -95,9 +123,12 @@ registerBlockType( 'cgb/uk-accordion-container-block', {
 	 */
 	save: function( props ) {
 		return (
-			<ul>
-				<InnerBlocks.Content />
-			</ul>
+			<li className={`${props.attributes.isOpen}`}>
+				<a class="uk-accordion-title" href="#">{props.attributes.title}</a>
+				<div class="uk-accordion-content">
+					<p>{props.attributes.content}</p>
+				</div>
+			</li>
 		);
 	},
 } );

@@ -1,17 +1,6 @@
-/**
- * Gutenberg Blocks
- *
- * All blocks related JavaScript files should be imported here.
- * You can create a new block folder in this dir and include code
- * for that block here as well.
- *
- * All blocks should be included here since this is the file that
- * Webpack is compiling as the input file.
- */
-
-// import './block/block.js';
 import './styleless-container/block.js';
+import './uk-accordion-container/block.js';
+import './uk-accordion-item/block.js';
 import './uk-container-block/block.js';
 import './uk-grid-block/block.js';
 import './uk-card-block/block.js';
-//import './uk-card/block.js';

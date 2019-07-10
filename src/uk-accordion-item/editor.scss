@@ -5,10 +5,11 @@
  * which makes it higher in priority.
  */
 
-.uk-accordion-container {
-  border: 0.2rem solid rgba(0, 0, 0, .8);
-  color: $black;
+.uk-accordion-item {
+  border: .5px solid rgba(0, 0, 0, .8);
+  background: white;
   margin: 0 auto;
   width: 100%;
   padding: 2rem;
+  list-style: none;
 }

@@ -45,16 +45,26 @@ registerBlockType( 'cgb/uk-grid-block', {
 	],
 	attributes: {
 		largeGridWidth: {
+			default: 4,
 			largeGridWidth: 4
 		},
 		medGridWidth: {
+			default: 3,
 			medGridWidth: 2
 		},
 		smallGridWidth: {
+			default: 2,
 			smallGridWidth: 1
 		},
 		gridAttribute: {
+			default: '',
 			gridAttribute: ''
+		},
+
+
+		textAlign: {
+			default: '',
+			textAlign: ''
 		}
 		
 	},
@@ -76,11 +86,11 @@ registerBlockType( 'cgb/uk-grid-block', {
 		return [
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Grid Width Sizes', 'uk-grid-block' ) }
+					title={ __( 'Grid Children Width Sizes', 'uk-grid-block' ) }
 				>
 					<PanelRow>
 						<RangeControl
-							label="Desktop Grid Width" 
+							label="Desktop Grid Children Width" 
 							min={2}
 							max={6}
 							onChange={largeGridWidth}
@@ -89,7 +99,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 					</PanelRow>
 					<PanelRow>
 						<RangeControl
-							label="Tablet Grid Width" 
+							label="Tablet Grid Children Width" 
 							min={1}
 							max={4}
 							onChange={medGridWidth}
@@ -98,7 +108,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 					</PanelRow>
 					<PanelRow>
 						<RangeControl
-							label="Mobile Grid Width" 
+							label="Mobile Grid Children Width" 
 							min={1}
 							max={3}
 							onChange={smallGridWidth}
@@ -124,6 +134,29 @@ registerBlockType( 'cgb/uk-grid-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+
+
+				<PanelBody
+					title={ __( 'Text Align', 'uk-grid-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Pick an alignment'
+							options={[
+									{ label: 'None', value: '' },
+									{ label: 'Left', value: 'uk-text-left' },
+									{ label: 'Right', value: 'uk-text-right' },
+									{ label: 'Center', value: 'uk-text-center' },
+									{ label: 'Justify', value: 'uk-text-justify' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { textAlign: value } );
+							}}							
+							selected={props.attributes.textAlign}
+						/>
+					</PanelRow>
+				</PanelBody>
+
 			</InspectorControls>,
 			<div className={ 'uk-grid' }>
 			
@@ -142,7 +175,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 	 */
 	save: function( props ) {
 		return (
-			<div className={ `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } uk-grid={`${props.attributes.gridAttribute}`}>
+			<div className={ `${props.attributes.textAlign} uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } uk-grid={`${props.attributes.gridAttribute}`}>
 				<InnerBlocks.Content />
 		   	</div>
 		);

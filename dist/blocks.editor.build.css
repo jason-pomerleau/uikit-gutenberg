@@ -4,6 +4,12 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
 /**
  * #.# Editor Styles
  *
@@ -23,6 +29,62 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.uk-accordion-container {
+  border: 0.2rem solid rgba(0, 0, 0, 0.8);
+  color: #292929;
+  background: pink;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.uk-accordion-item {
+  border: 0.5px solid rgba(0, 0, 0, 0.8);
+  background: white;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  list-style: none; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
 /**
  * #.# Editor Styles
  *
@@ -41,6 +103,12 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
 /**
  * #.# Editor Styles
  *
@@ -59,6 +127,12 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
 /**
  * #.# Editor Styles
  *

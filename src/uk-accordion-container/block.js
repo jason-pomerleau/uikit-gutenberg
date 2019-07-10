@@ -31,19 +31,20 @@ const {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/uk-accordion-container-block', {
+registerBlockType( 'uikit-gutenberg/uk-accordion-container-block', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'uk-container-block' ), // Block title.
+	title: __( 'uk-accordion-container-block' ), // Block title.
 	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
 		__( 'uk', 'UK' ),
 		__( 'Test' ),
-		__( 'container' ),
+		__( 'accordion', 'container' ),
 	],
 	attributes: {
 		accordionSetting: {
-			accordionSetting: 0
+			default: '',
+			accordionSetting: ''
 		}
 	},
 
@@ -56,8 +57,8 @@ registerBlockType( 'cgb/uk-accordion-container-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
+		//props.setAttributes( { accordionSetting: '' } );
 		return [
-			//.uk-margin-medium
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'Accordion Settings', 'uk-accordion-container-block' ) }
@@ -72,8 +73,11 @@ registerBlockType( 'cgb/uk-accordion-container-block', {
 								]}
 							onChange={( value ) => {
 								props.setAttributes( { accordionSetting: value } );
+							
 							}}							
-							selected={props.attributes.marginRadio}
+							
+							selected={props.attributes.accordionSetting}
+							
 						/>
 					</PanelRow>
 				</PanelBody>
