@@ -42,7 +42,7 @@ Every block has a few inspector controls that are the same for each, ex. text-al
 Some blocks have inspector controls that are specific to that block, ex. uk-grid which has a child width selector.
 
 
-
+### To request a new block, create an issue. Enjoy!
 
 
 
