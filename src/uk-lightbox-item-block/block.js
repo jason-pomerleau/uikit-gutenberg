@@ -258,7 +258,7 @@ registerBlockType( 'cgb/uk-lightbox-item-block', {
 
 	save: function( props ) {
 		return (
-			<div>
+			<div className={`${props.attributes.marginRadio} ${props.attributes.textAlign} ${props.attributes.width_class} ${props.attributes.visibility_class}`}>
 				<a class="uk-inline" href={`${props.attributes.imageURL}`} data-caption={`${props.attributes.imageCaption}`}>
 					<img src={`${props.attributes.imageURL}`} alt={`${props.attributes.imageCaption}`} />
 				</a>

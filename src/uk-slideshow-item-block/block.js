@@ -12,7 +12,8 @@ const {
 	SelectControl,
     PanelBody,
     PanelRow,
-	RadioControl
+	RadioControl,
+	TextareaControl
 } = wp.components;
 
 
@@ -26,6 +27,18 @@ registerBlockType( 'cgb/uk-slideshow-item-block', {
 	],
 
 	attributes: {
+		contentOverlay: {
+			default: 'no',
+			contentOverlay: ''
+		},
+		contentOverlayTitle: {
+			default: '',
+			contentOverlayTitle: ''
+		},
+		contentOverlayBody: {
+			default: '',
+			contentOverlayBody: ''
+		},
 		kenBurns: {
 			default: '',
 			kenBurns: ''
@@ -78,6 +91,24 @@ registerBlockType( 'cgb/uk-slideshow-item-block', {
 
 			
 			<InspectorControls>
+				<PanelBody
+					title={ __( 'Set image URL', 'uk-slideshow-item-block' ) }
+				>
+					<PanelRow>
+						<TextControl
+							label="Image URL"
+							value={ props.attributes.imageURL }
+							onChange={ ( value ) => props.setAttributes( { imageURL: value } ) }
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							label="Image Alt"
+							value={ props.attributes.imageCaption }
+							onChange={ ( value ) => props.setAttributes( { imageCaption: value } ) }
+						/>
+					</PanelRow>
+				</PanelBody>
 
 				<PanelBody
 					title={ __( 'Effects', 'uk-slideshow-item-block' ) }
@@ -96,35 +127,41 @@ registerBlockType( 'cgb/uk-slideshow-item-block', {
 							selected={props.attributes.kenBurns}
 						/>
 					</PanelRow>
-					{/* <PanelRow>
-						<TextControl
-							label="Content Overlay"
-							value={ props.attributes.imageURL }
-							onChange={ ( value ) => props.setAttributes( { imageURL: value } ) }
-						/>
-					</PanelRow> */}
-				</PanelBody>
 
-				<PanelBody
-					title={ __( 'Set image URL', 'uk-slideshow-item-block' ) }
-				>
 					<PanelRow>
-						<TextControl
-							label="Image URL"
-							value={ props.attributes.imageURL }
-							onChange={ ( value ) => props.setAttributes( { imageURL: value } ) }
+					<RadioControl 
+							label='Do you want a Content Overlay?'
+							options={[
+									{ label: 'No', value: 'no' },
+									{ label: 'Yes', value: 'yes' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { contentOverlay: value } );
+							}}							
+							selected={props.attributes.contentOverlay}
 						/>
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label="Image Caption"
-							value={ props.attributes.imageCaption }
-							onChange={ ( value ) => props.setAttributes( { imageCaption: value } ) }
+							label="Content Overlay Title"
+							value={ props.attributes.contentOverlayTitle }
+							onChange={ ( value ) => props.setAttributes( { contentOverlayTitle: value } ) }
 						/>
 					</PanelRow>
+					<PanelRow>
+						<TextareaControl
+							label="Content Overlay Body"
+							help="Enter content body"
+							value={ props.attributes.contentOverlayBody }
+							onChange={ ( value ) => props.setAttributes( { contentOverlayBody: value } ) }
+						/>
+					</PanelRow>
+
+
+
+
+
 				</PanelBody>
-
-
 
 
 				{/* ##########DEFAULT CONTROLS########## */}
@@ -287,15 +324,41 @@ registerBlockType( 'cgb/uk-slideshow-item-block', {
 	},
 
 	save: function( props ) {
-		if(props.attributes.kenBurns != '') {
-		return (
-			<li>
-				<div className={`${props.attributes.kenBurns}`}>
+		// both
+		if(props.attributes.kenBurns != '' && props.attributes.contentOverlay == 'yes') {
+			return (
+				<li>
+					<div className={`${props.attributes.kenBurns}`}>
+						<img src={props.attributes.imageURL} alt={props.attributes.imageCaption} uk-cover="" />
+						<div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+							<h3 class="uk-margin-remove">{props.attributes.contentOverlayTitle}</h3>
+							<p class="uk-margin-remove">{props.attributes.contentOverlayBody}</p>
+						</div>
+					</div>
+				</li>
+			);
+		// ken burns
+		} else if(props.attributes.kenBurns != '' && props.attributes.contentOverlay == 'no') {
+			return (
+				<li>
+					<div className={`${props.attributes.kenBurns}`}>
+						<img src={props.attributes.imageURL} alt={props.attributes.imageCaption} uk-cover="" />
+					</div>
+				</li>
+			);
+		// content overlay
+		} else if(props.attributes.contentOverlay == 'yes' && props.attributes.kenBurns == '') {
+			return (
+				<li>
 					<img src={props.attributes.imageURL} alt={props.attributes.imageCaption} uk-cover="" />
-				</div>
-			</li>
-		);
-		} else if(props.attributes.kenBurns == '') {
+					<div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+						<h3 class="uk-margin-remove">{props.attributes.contentOverlayTitle}</h3>
+						<p class="uk-margin-remove">{props.attributes.contentOverlayBody}</p>
+					</div>
+				</li>
+			);
+		// nothing
+		} else if(props.attributes.kenBurns == '' && props.attributes.contentOverlay == 'no') {
 			return (
 				<li>
 					<img src={props.attributes.imageURL} alt={props.attributes.imageCaption} uk-cover="" />
