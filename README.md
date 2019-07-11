@@ -1,12 +1,12 @@
-This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
+
 
 #UIkit Gutenberg Blocks
 
 ##Description
 A set of blocks widht UIKit classes built into them for the Gutenberg editor in Wordpress. Version 1.0.0
 
-UIKit: https://getuikit.com/docs/introduction
-
+Documentation for [UIKit](https://getuikit.com/docs/introduction)
+This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
 
 ##Features
 ### Current Blocks
@@ -26,7 +26,7 @@ UIKit: https://getuikit.com/docs/introduction
 4. When you finish developing run `npm run build` for a more optimized build
 
 ### To add the blocks to your theme
-1. Create a folder inthe plugin section of your theme
+1. Create a folder in the plugin section of your theme
 2. Add the `dist` folder and the `plugin.php` file to that folder
 3. Open a post and type 'uk' inside the block search tool
 
