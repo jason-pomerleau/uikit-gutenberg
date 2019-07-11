@@ -1,10 +1,8 @@
-// THE DEFAULT/STANDARD UIKIT BLOCK
-// Duplicate this code and make your new block
-// Doesn't come with any styles
-
 //  Import CSS.
 import './style.scss';
 import './editor.scss';
+
+import icon from '../icon';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -21,7 +19,7 @@ const {
 registerBlockType( 'cgb/uk-lightbox-item-block', {
 
 	title: __( 'uk-lightbox-item-block' ), // Block title.
-	icon: 'shield', 					// Block icon
+	icon, 					// Block icon
 	category: 'common', 				// Block category
 	keywords: [ 						// Search by these keywords
 		__( 'uk', 'UK', 'uikit' ),
