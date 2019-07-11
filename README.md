@@ -1,14 +1,14 @@
 
 
-#UIkit Gutenberg Blocks
+# UIkit Gutenberg Blocks
 
-##Description
+## Description
 A set of blocks widht UIKit classes built into them for the Gutenberg editor in Wordpress. Version 1.0.0
 
 Documentation for [UIKit](https://getuikit.com/docs/introduction)
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
 
-##Features
+## Features
 ### Current Blocks
 - styleless-container, for a styleless div you can add classes to
 - uk-container
@@ -17,7 +17,7 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 - uk-lightbox
 - uk-card
 
-##Get Started
+## Get Started
 
 ### To Change/Add blocks
 1. Open the src folder in terminal
