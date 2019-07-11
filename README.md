@@ -13,8 +13,8 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 - styleless-container, for a styleless div you can add classes to
 - uk-container
 - uk-grid
-- uk-accordion
-- uk-lightbox
+- uk-accordion w/ uk-accordion-item
+- uk-lightbox w/ uk-lightbox-item
 - uk-card
 
 ## Get Started
@@ -30,7 +30,16 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 2. Add the `dist` folder and the `plugin.php` file to that folder
 3. Open a post and type 'uk' inside the block search tool
 
+## Usage
+These blocks aren't made to replace the standard gutenberg blocks, but instead to work with them.
 
+Its very simple, ideally you would start with the uk-container block which would hold all of the other blocks.
+
+If you want to style certain blocks differently outside of wordpress/uikit, you can add the styleless-container block and give it a class which you can use in your styles.
+
+Every block has a few inspector controls that are the same for each, ex. text-align, margin, width, and visibility.
+
+Some blocks have inspector controls that are specific to that block, ex. uk-grid which has a child width selector.
 
 
 
