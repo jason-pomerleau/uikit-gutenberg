@@ -17,6 +17,7 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 - uk-accordion w/ uk-accordion-item
 - uk-lightbox w/ uk-lightbox-item
 - uk-card
+- uk-slideshow w/ uk-slideshow-item
 
 ## Get Started
 
