@@ -92,11 +92,11 @@
  * which makes it higher in priority.
  */
 .uk-container {
-  border: 0.2rem solid #292929;
+  border: 1px solid #292929;
   color: #292929;
   margin: 0 auto;
   width: 100%;
-  padding: 2rem; }
+  padding: 10px; }
 /**
  * #.# Common SCSS
  *
@@ -168,4 +168,25 @@
  */
 .uk-lightbox {
   background: lightgreen;
+  border: 1px solid grey;
+  padding: 20px; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.uk-lightbox-item {
   border: 1px solid grey; }

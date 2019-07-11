@@ -14,6 +14,7 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 import { InnerBlocks } from '@wordpress/editor'; // inner blocks
 const { InspectorControls } = wp.editor;
 const {
+	TextControl,
 	SelectControl,
     PanelBody,
     PanelRow,
@@ -69,6 +70,22 @@ registerBlockType( 'cgb/uk-grid-block', {
 			default: '',
 			gridAttribute: ''
 		},
+		useScrollspy: {
+			default: 'no',
+			useScrollspy: ''
+		},
+		scrollspyAttribute: {
+			default: '',
+			scrollspyAttribute: ''
+		},
+		scrollspyTarget: {
+			default: '',
+			scrollspyTarget: ''
+		},
+		scrollspyDelay: {
+			default: '',
+			scrollspyDelay: ''
+		},
 
 		visibility_verb: {
 			default: '',
@@ -105,6 +122,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 
 		return [
 			<InspectorControls>
+				
 				<PanelBody
 					title={ __( 'Grid Children Width Sizes', 'uk-grid-block' ) }
 				>
@@ -197,6 +215,65 @@ registerBlockType( 'cgb/uk-grid-block', {
 						/>
 					</PanelRow>
 				</PanelBody>
+
+
+
+
+				<PanelBody
+					title={ __( 'Scrollspy Attributes', 'uk-grid-block' ) }
+				>
+					<PanelRow>
+						<RadioControl 
+							label='Use Scrollspy?'
+							options={[
+									{ label: 'No', value: 'no' },
+									{ label: 'Yes', value: 'yes' },
+								]}
+							onChange={( value ) => {
+								props.setAttributes( { useScrollspy: value } );
+								if(value == 'yes' && props.attributes.scrollspyTarget != '' && props.attributes.scrollspyDelay != '') {
+									props.setAttributes( { scrollspyAttribute: `target: ${props.attributes.scrollspyTarget}; cls: uk-animation-fade; delay: ${props.attributes.scrollspyDelay}` } );
+								} else {
+									props.setAttributes( { scrollspyAttribute: ''} );
+								}
+							}}							
+							selected={props.attributes.useScrollspy}
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<TextControl
+							label='Target'
+							onChange={( value ) => {
+								props.setAttributes( { scrollspyTarget: value } );
+								if(props.attributes.useScrollspy == 'yes' && value != '' && props.attributes.scrollspyDelay != '') {
+									props.setAttributes( { scrollspyAttribute: `target: ${value}; cls: uk-animation-fade; delay: ${props.attributes.scrollspyDelay}` } );
+								} else {
+									props.setAttributes( { scrollspyAttribute: ''} );
+								}
+							}}							
+							value={props.attributes.scrollspyTarget}
+						/>
+					</PanelRow>
+
+					<PanelRow>
+						<TextControl
+							label='Delay'
+							onChange={( value ) => {
+								props.setAttributes( { scrollspyDelay: value } );
+								if(props.attributes.useScrollspy == 'yes' && props.attributes.scrollspyTarget != '' && value != '') {
+									props.setAttributes( { scrollspyAttribute: `target: ${props.attributes.scrollspyTarget}; cls: uk-animation-fade; delay: ${value}` } );
+								} else {
+									props.setAttributes( { scrollspyAttribute: ''} );
+								}
+							}}							
+							value={props.attributes.scrollspyDelay}
+						/>
+					</PanelRow>
+				</PanelBody>
+
+
+
 
 
 				{/* ##########DEFAULT CONTROLS########## */}
@@ -314,7 +391,7 @@ registerBlockType( 'cgb/uk-grid-block', {
 	 */
 	save: function( props ) {
 		return (
-			<div className={ `${props.attributes.marginRadio} ${props.attributes.textAlign} ${props.attributes.childWidthClass}` } uk-grid={`${props.attributes.gridAttribute}`}>
+			<div className={ `${props.attributes.marginRadio} ${props.attributes.textAlign} ${props.attributes.childWidthClass}` } uk-grid={`${props.attributes.gridAttribute}`} uk-scrollspy={`${props.attributes.scrollspyAttribute}`}>
 				<InnerBlocks.Content />
 		   	</div>
 		);

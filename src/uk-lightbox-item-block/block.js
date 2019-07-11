@@ -8,50 +8,33 @@ import './editor.scss';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { InspectorControls, InnerBlocks } = wp.editor;
+const { InspectorControls } = wp.editor;
 const {
+	TextControl,
 	SelectControl,
     PanelBody,
     PanelRow,
-	RadioControl,
-	RangeControl
+	RadioControl
 } = wp.components;
 
 
-registerBlockType( 'cgb/uk-lightbox-block', {
+registerBlockType( 'cgb/uk-lightbox-item-block', {
 
-	title: __( 'uk-lightbox-block' ), // Block title.
+	title: __( 'uk-lightbox-item-block' ), // Block title.
 	icon: 'shield', 					// Block icon
 	category: 'common', 				// Block category
 	keywords: [ 						// Search by these keywords
 		__( 'uk', 'UK', 'uikit' ),
-		__( 'lightbox' ),
 	],
 
 	attributes: {
-		lightboxAttribute: {
+		imageURL: {
+			default: 'http://fillmurray.com/500/500',
+			imageURL: ''
+		},
+		imageCaption: {
 			default: '',
-			lightboxAttribute: ''
-		},
-		specifyChildWidth: {
-			default: 'no',
-			specifyChildWidth: ''
-		},
-		childWidthClass: {
-			default: '',
-			childWidthClass: ''
-		},
-		largeGridWidth: {
-			default: 4,
-			largeGridWidth: 4
-		},
-		medGridWidth: {
-			default: 3,
-			medGridWidth: 2
-		},
-		smallGridWidth: {
-			default: 2,
-			smallGridWidth: 1
+			imageCaption: ''
 		},
 
 		visibility_verb: {
@@ -93,104 +76,34 @@ registerBlockType( 'cgb/uk-lightbox-block', {
 
 			
 			<InspectorControls>
+
 				<PanelBody
-					title={ __( 'Lightbox Animations', 'uk-grid-block' ) }
+					title={ __( 'Set image URL', 'uk-lightbox-item-block' ) }
 				>
 					<PanelRow>
-						<SelectControl 
-							label='Pick an attribute'
-							options={[
-									{ label: 'None', value: '' },
-									{ label: 'Slide', value: 'animation: slide' },
-									{ label: 'Fade', value: 'animation: fade' },
-									{ label: 'Scale', value: 'animation: scale' },
-								]}
-							onChange={( value ) => {
-								props.setAttributes( { lightboxAttribute: value } );
-							}}							
-							value={props.attributes.lightboxAttribute}
+						<TextControl
+							label="Image URL"
+							value={ props.attributes.imageURL }
+							onChange={ ( value ) => props.setAttributes( { imageURL: value } ) }
+						/>
+					</PanelRow>
+					<PanelRow>
+						<TextControl
+							label="Image Caption"
+							value={ props.attributes.imageCaption }
+							onChange={ ( value ) => props.setAttributes( { imageCaption: value } ) }
 						/>
 					</PanelRow>
 				</PanelBody>
-				<PanelBody
-					title={ __( 'Grid Children Width Sizes', 'uk-grid-block' ) }
-				>
-					<PanelRow>
-					<RadioControl 
-							label='Do you want child width sizes specified?'
-							options={[
-									{ label: 'No', value: 'no' },
-									{ label: 'Yes', value: 'yes' },
-								]}
-							onChange={( value ) => {
-								props.setAttributes( { specifyChildWidth: value } );
 
-								// if its true, create the class of all the child widths
-								if(props.attributes.specifyChildWidth == 'no') {
-									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
-								} else if(props.attributes.specifyChildWidth == 'yes') {
-									props.setAttributes( { childWidthClass: ''} );
-								}
-							}}
-							
-							selected={props.attributes.specifyChildWidth}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<RangeControl
-							label="Desktop Grid Children Width" 
-							min={2}
-							max={6}
-							onChange={( value ) => {
-								props.setAttributes( { largeGridWidth: value } );
-								if(props.attributes.specifyChildWidth == 'yes') {
-									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${value}@l uk-grid` } );
-								} else if(props.attributes.specifyChildWidth == 'no') {
-									props.setAttributes( { childWidthClass: ''} );
-								}
-							}}
 
-							value={props.attributes.largeGridWidth}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<RangeControl
-							label="Tablet Grid Children Width" 
-							min={1}
-							max={4}
-							onChange={( value ) => {
-								props.setAttributes( { medGridWidth: value } );
-								if(props.attributes.specifyChildWidth == 'yes') {
-									props.setAttributes( { childWidthClass: `uk-child-width-1-${props.attributes.smallGridWidth}@s uk-child-width-1-${value}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
-								} else if(props.attributes.specifyChildWidth == 'no') {
-									props.setAttributes( { childWidthClass: ''} );
-								}
-							}}
-							value={props.attributes.medGridWidth}
-						/>
-					</PanelRow>
-					<PanelRow>
-						<RangeControl
-							label="Mobile Grid Children Width" 
-							min={1}
-							max={3}
-							onChange={( value ) => {
-								props.setAttributes( { smallGridWidth: value } );
-								if(props.attributes.specifyChildWidth == 'yes') {
-									props.setAttributes( { childWidthClass: `uk-child-width-1-${value}@s uk-child-width-1-${props.attributes.medGridWidth}@m uk-child-width-1-${props.attributes.largeGridWidth}@l uk-grid` } );
-								} else if(props.attributes.specifyChildWidth == 'no') {
-									props.setAttributes( { childWidthClass: ''} );
-								}
-							}}
-							value={props.attributes.smallGridWidth}
-						/>
-					</PanelRow>
-				</PanelBody>
+
+
 				{/* ##########DEFAULT CONTROLS########## */}
 
 				{/* VISIBILITY */}
 				<PanelBody
-					title={ __( 'Set visibility?', 'uk-lightbox-block' ) }
+					title={ __( 'Set visibility?', 'uk-lightbox-item-block' ) }
 				>
 					<h4>uk-visibility-</h4>
 					<PanelRow>
@@ -240,7 +153,7 @@ registerBlockType( 'cgb/uk-lightbox-block', {
 
 				{/* WIDTH */}
 				<PanelBody
-					title={ __( 'Set width?', 'uk-lightbox-block' ) }
+					title={ __( 'Set width?', 'uk-lightbox-item-block' ) }
 				>
 					<h4>uk-width-</h4>
 					<PanelRow>
@@ -295,7 +208,7 @@ registerBlockType( 'cgb/uk-lightbox-block', {
 				</PanelBody>
 				{/* MARGIN */}
 				<PanelBody
-					title={ __( 'Add margin?', 'uk-lightbox-block' ) }
+					title={ __( 'Add margin?', 'uk-lightbox-item-block' ) }
 				>
 					<PanelRow>
 						<RadioControl 
@@ -318,7 +231,7 @@ registerBlockType( 'cgb/uk-lightbox-block', {
 				</PanelBody>
 
 				{/* TEXT ALIGN */}
-				<PanelBody title={ __( 'Text Align', 'uk-lightbox-block' ) } >
+				<PanelBody title={ __( 'Text Align', 'uk-lightbox-item-block' ) } >
 					<PanelRow>
 						<RadioControl 
 							label='Pick an alignment'
@@ -339,17 +252,18 @@ registerBlockType( 'cgb/uk-lightbox-block', {
 				{/* ################################### */}
 			</InspectorControls>
 			,
-			<div className={ 'uk-lightbox' }>
-				<p class="directions">Put lightbox item blocks in here</p>
-				<InnerBlocks />
+			<div className={`uk-lightbox-item`}>
+				<p class="directions">See sidebar for configuration of this block</p>
 			</div>
 		];
 	},
 
 	save: function( props ) {
 		return (
-			<div className={`${props.attributes.marginRadio} ${props.attributes.textAlign} ${props.attributes.width_class} ${props.attributes.visibility_class} ${props.attributes.childWidthClass}`} uk-lightbox={`${props.attributes.lightboxAttribute}`}>
-				<InnerBlocks.Content />
+			<div>
+				<a class="uk-inline" href={`${props.attributes.imageURL}`} data-caption={`${props.attributes.imageCaption}`}>
+					<img src={`${props.attributes.imageURL}`} alt={`${props.attributes.imageCaption}`} />
+				</a>
 			</div>
 		);
 	},
