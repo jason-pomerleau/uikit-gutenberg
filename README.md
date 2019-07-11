@@ -27,6 +27,7 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 4. Duplicate the 'default-uikit-block'
 5. Start developing your block
 5. When you finish developing run `npm run build` for a more optimized build
+6. Make sure you add your new bloc kto the 'src/blocks.js' file
 
 ### To add the blocks to your theme
 1. Create a folder in the plugin directory of your theme
