@@ -23,13 +23,16 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 ### To Change/Add blocks
 1. Open the src folder in terminal
 2. Run `npm install`
-3. Run `npm run start` to develop
-4. When you finish developing run `npm run build` for a more optimized build
+3. Run `npm run start` to develop, it will build the whole plugin everytime you save
+4. Duplicate the 'default-uikit-block'
+5. Start developing your block
+5. When you finish developing run `npm run build` for a more optimized build
 
 ### To add the blocks to your theme
-1. Create a folder in the plugin section of your theme
-2. Add the `dist` folder and the `plugin.php` file to that folder
-3. Open a post and type 'uk' inside the block search tool
+1. Create a folder in the plugin directory of your theme
+2. Add the `dist` folder and the `plugin.php` file to that directory
+3. Open one of your posts and type 'uk' inside the block search tool
+4. Try out each block and discover the power of UIKit with Gutenberg
 
 ## Usage
 These blocks aren't made to replace the standard gutenberg blocks, but instead to work with them.
