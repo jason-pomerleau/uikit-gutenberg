@@ -9,4 +9,17 @@
     background: lightblue;
     padding: 10px;
     border: 1px solid black;
+
+    .wp-block-paragraph:first-of-type {
+        border: 1px solid red;
+        &::after {
+            content: 'delete this element before updating';
+            color: red;
+            width: 100%;
+            padding-left: 40px;
+            font-weight: bolder;
+            text-align: right;
+            font-family: sans-serif;
+        }
+    }
 }

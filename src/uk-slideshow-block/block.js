@@ -241,7 +241,7 @@ registerBlockType( 'cgb/uk-slideshow-block', {
 			</InspectorControls>
 			,
 			<div className={ 'uk-slideshow' }>
-				<p className={ 'directions' }>Place slideshow item blocks here.(make sure you don't accidentally add a different block under the slideshow items)</p>
+				<p className={ 'directions' }>Place slideshow item blocks here.</p>
 				<InnerBlocks />
 			</div>
 		];

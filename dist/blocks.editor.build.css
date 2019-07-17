@@ -170,6 +170,17 @@
   background: lightgreen;
   border: 1px solid grey;
   padding: 20px; }
+  .uk-lightbox .wp-block-paragraph:first-of-type {
+    border: 1px solid red; }
+    .uk-lightbox .wp-block-paragraph:first-of-type::after {
+      content: 'delete this -moz-element before updating';
+      content: 'delete this element before updating';
+      color: red;
+      width: 100%;
+      padding-left: 40px;
+      font-weight: bolder;
+      text-align: right;
+      font-family: sans-serif; }
 /**
  * #.# Common SCSS
  *
@@ -189,7 +200,8 @@
  * which makes it higher in priority.
  */
 .uk-lightbox-item {
-  border: 1px solid grey; }
+  border: 1px solid grey;
+  padding: 8px; }
 /**
  * #.# Common SCSS
  *
@@ -212,6 +224,17 @@
   background: lightblue;
   padding: 10px;
   border: 1px solid black; }
+  .uk-slideshow .wp-block-paragraph:first-of-type {
+    border: 1px solid red; }
+    .uk-slideshow .wp-block-paragraph:first-of-type::after {
+      content: 'delete this -moz-element before updating';
+      content: 'delete this element before updating';
+      color: red;
+      width: 100%;
+      padding-left: 40px;
+      font-weight: bolder;
+      text-align: right;
+      font-family: sans-serif; }
 /**
  * #.# Common SCSS
  *
@@ -230,5 +253,6 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.uk-lightbox-item {
-  border: 1px solid grey; }
+.uk-slideshow-item {
+  border: 1px solid grey;
+  padding: 8px; }

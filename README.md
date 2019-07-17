@@ -5,6 +5,10 @@
 ## Description
 A set of blocks widht UIKit classes built into them for the Gutenberg editor in Wordpress. Version 1.0.0
 
+These blocks aren't made to replace the standard gutenberg blocks, but instead to work with them.
+
+The expectation is that you want to use UIKit for a quick page structure and use your own theme's styles separately.
+
 Documentation for [UIKit](https://getuikit.com/docs/introduction)
 
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
@@ -37,8 +41,6 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 4. Try out each block and discover the power of UIKit with Gutenberg
 
 ## Usage
-These blocks aren't made to replace the standard gutenberg blocks, but instead to work with them.
-
 Its very simple, ideally you would start with the uk-container block which would hold all of the other blocks.
 
 If you want to style certain blocks differently outside of wordpress/uikit, you can add the styleless-container block and give it a class which you can use in your styles.
@@ -49,14 +51,3 @@ Some blocks have inspector controls that are specific to that block, ex. uk-grid
 
 
 ### To request a new block, create an issue. Enjoy!
-
-
-
-
-
-<!-- Visibility: hidden@ s m l xl
-width: uk-width- X of X
-Margin: none, small, medium, large, Xlarge, auto
-text alignment: right, center, left, justify
-
-put all the common things into one file and share that file with every block -->
