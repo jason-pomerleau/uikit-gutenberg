@@ -11,25 +11,37 @@ import icon from '../icon';
 
 const { __ } = wp.i18n; 
 const { registerBlockType } = wp.blocks;
-const { InspectorControls } = wp.editor;
+const { InspectorControls, RichText } = wp.editor;
 const {
 	SelectControl,
     PanelBody,
     PanelRow,
-	RadioControl
+	RadioControl,
+	TextControl
 } = wp.components;
 
 
-registerBlockType( 'cgb/default-uikit-block', {
+registerBlockType( 'cgb/uk-modal-block', {
 
-	title: __( 'default-uikit-block' ), // Block title.
-	icon, 								// Block icon
-	category: 'common', 				// Block category
-	keywords: [ 						// Search by these keywords
+	title: __( 'uk-modal-block' ), 	// Block title.
+	icon, 							// Block icon
+	category: 'common', 			// Block category
+	keywords: [ 					// Search by these keywords
 		__( 'uk', 'UK', 'uikit' ),
 	],
 
 	attributes: {
+		modalId: {
+			default: 'first-modal',
+			modalId: ''
+		},
+		title: {
+			title: ''
+		},
+		content: {
+			content: ''
+		},
+
 		visibility_verb: {
 			default: '',
 			visibility_verb: ''
@@ -69,11 +81,24 @@ registerBlockType( 'cgb/default-uikit-block', {
 
 			
 			<InspectorControls>
+				<PanelBody
+					title={ __( 'Modal ID', 'uk-modal-block' ) }
+				>
+					<PanelRow>
+						<TextControl
+							label='Write an ID for the Modal.'
+							onChange={( value ) => {
+								props.setAttributes( { modalId: value } );
+							}}							
+							value={props.attributes.modalId}
+						/>
+					</PanelRow>
+				</PanelBody>
 				{/* ##########DEFAULT CONTROLS########## */}
 
 				{/* VISIBILITY */}
 				<PanelBody
-					title={ __( 'Set visibility?', 'default-uikit-block' ) }
+					title={ __( 'Set visibility?', 'uk-modal-block' ) }
 				>
 					<h4>uk-visibility-</h4>
 					<PanelRow>
@@ -123,7 +148,7 @@ registerBlockType( 'cgb/default-uikit-block', {
 
 				{/* WIDTH */}
 				<PanelBody
-					title={ __( 'Set width?', 'default-uikit-block' ) }
+					title={ __( 'Set width?', 'uk-modal-block' ) }
 				>
 					<h4>uk-width-</h4>
 					<PanelRow>
@@ -178,7 +203,7 @@ registerBlockType( 'cgb/default-uikit-block', {
 				</PanelBody>
 				{/* MARGIN */}
 				<PanelBody
-					title={ __( 'Add margin?', 'default-uikit-block' ) }
+					title={ __( 'Add margin?', 'uk-modal-block' ) }
 				>
 					<PanelRow>
 						<RadioControl 
@@ -201,7 +226,7 @@ registerBlockType( 'cgb/default-uikit-block', {
 				</PanelBody>
 
 				{/* TEXT ALIGN */}
-				<PanelBody title={ __( 'Text Align', 'default-uikit-block' ) } >
+				<PanelBody title={ __( 'Text Align', 'uk-modal-block' ) } >
 					<PanelRow>
 						<RadioControl 
 							label='Pick an alignment'
@@ -222,15 +247,49 @@ registerBlockType( 'cgb/default-uikit-block', {
 				{/* ################################### */}
 			</InspectorControls>
 			,
-			<div className={`default-uikit`}>
+			<div className={`uk-modal`}>
+				<p class="directions">Write an ID for the modal in the side bar.</p>
+				<div class="title">
+					<RichText
+						tagName="div"
+						multiline="h2"
+						placeholder={ __( 'Add your modal title', 'uk-card') }
+						onChange={( value ) => {
+							props.setAttributes( { title: value } );
+						}}							
+						value={ props.attributes.title }
+					/>
+				</div>
+				<RichText
+					tagName="div"
+					multiline=""
+					placeholder={ __( 'Add your modal content', 'uk-card' ) }
+					onChange={( value ) => {
+						props.setAttributes( { content: value } );
+					}}	
+					value={ props.attributes.content }
+				/>
 			</div>
 		];
 	},
 
 	save: function( props ) {
 		return (
-			<div className={``}>
-		   	</div>
+			<div>
+				<a class="uk-button uk-button-default" href={`#${props.attributes.modalId}`} uk-toggle="">Open</a>
+
+				<div id={`${props.attributes.modalId}`} class="uk-flex-top" uk-modal="">
+					<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+						<button class="uk-modal-close-default" type="button" uk-close=""></button>
+
+						<h2 class="uk-modal-title">{props.attributes.title}</h2>
+						<div>{props.attributes.content}</div>
+
+					</div>
+				</div>
+			</div>
+			
 		);
 	},
 } );

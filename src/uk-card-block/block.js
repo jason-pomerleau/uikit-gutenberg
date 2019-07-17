@@ -233,13 +233,15 @@ registerBlockType( 'cgb/uk-card-block', {
 			</InspectorControls>,
 
 			<div className={'uk-card'}>
-				<RichText
-					tagName="div"
-					multiline="h2"
-					placeholder={ __( 'Add your custom title', 'uk-card') }
-					onChange={ onChangeTitle }
-					value={ props.attributes.title }
-				/>
+				<div class="title">
+					<RichText
+						tagName="div"
+						multiline="h2"
+						placeholder={ __( 'Add your custom title', 'uk-card') }
+						onChange={ onChangeTitle }
+						value={ props.attributes.title }
+					/>
+				</div>
 				<RichText
 					tagName="div"
 					multiline=""

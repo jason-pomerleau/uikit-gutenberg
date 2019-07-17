@@ -22,6 +22,7 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 - uk-lightbox w/ uk-lightbox-item
 - uk-card
 - uk-slideshow w/ uk-slideshow-item
+- uk-modal
 
 ## Get Started
 
@@ -30,9 +31,10 @@ This project was bootstrapped with [Create Guten Block](https://github.com/ahmad
 2. Run `npm install`
 3. Run `npm run start` to develop, it will build the whole plugin everytime you save
 4. Duplicate the 'default-uikit-block'
-5. Start developing your block
-5. When you finish developing run `npm run build` for a more optimized build
-6. Make sure you add your new bloc kto the 'src/blocks.js' file
+5. Find and replace 'default-uikit' with your new block name
+6. Start developing your block
+7. When you finish developing run `npm run build` for a more optimized build
+8. Make sure you add your new bloc kto the 'src/blocks.js' file
 
 ### To add the blocks to your theme
 1. Create a folder in the plugin directory of your theme

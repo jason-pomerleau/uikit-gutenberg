@@ -6,10 +6,10 @@
  */
 
 .uk-accordion-container {
-  border: 0.2rem solid rgba(0, 0, 0, .8);
+  border: 1px solid rgba(0, 0, 0, .8);
   color: $black;
   background: pink;
   margin: 0 auto;
   width: 100%;
-  padding: 2rem;
+  padding: 10px !important;
 }

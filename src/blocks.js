@@ -8,3 +8,4 @@ import './uk-lightbox-block/block.js';
 import './uk-lightbox-item-block/block.js';
 import './uk-slideshow-block/block.js';
 import './uk-slideshow-item-block/block.js';
+import './uk-modal-block/block.js';

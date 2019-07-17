@@ -254,13 +254,15 @@ registerBlockType( 'cgb/uk-accordion-item-block', {
 			</InspectorControls>,
 			<li className={ 'uk-accordion-item' }>
 				<div>
-					<RichText
-						tagName="div"
-						multiline="h2"
-						placeholder={ __( 'Add your custom title', 'uk-accordion-item-block') }
-						onChange={ onChangeTitle }
-						value={ props.attributes.title }
-					/>
+					<div class="title">	
+						<RichText
+							tagName="div"
+							multiline="h2"
+							placeholder={ __( 'Add your custom title', 'uk-accordion-item-block') }
+							onChange={ onChangeTitle }
+							value={ props.attributes.title }
+						/>
+					</div>
 					<RichText
 						tagName="div"
 						multiline=""

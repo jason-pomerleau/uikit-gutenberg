@@ -12,9 +12,29 @@ $gray: #dedede;
 $green: #bada55;
 $red: orangered;
 
+@font-face {
+    font-family: 'Open Sans';
+    src: url('https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900');
+}
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
 .directions {
     font-size: 14px;
     font-family: sans-serif;
     font-weight: lighter;
     color: rgba(0, 0, 0, .6);
+}
+
+.title {
+    font-weight: 900 !important;
+}
+
+img, figure, .wp-block-image {
+    // max-width: 460px !important;
+    // height: auto;
+    // max-height: 400px !important;
 }

@@ -4,11 +4,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -29,11 +40,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -42,23 +64,34 @@
  * which makes it higher in priority.
  */
 .uk-accordion-container {
-  border: 0.2rem solid rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
   color: #292929;
   background: pink;
   margin: 0 auto;
   width: 100%;
-  padding: 2rem; }
+  padding: 10px !important; }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -67,11 +100,8 @@
  * which makes it higher in priority.
  */
 .uk-accordion-item {
-  border: 0.5px solid rgba(0, 0, 0, 0.8);
-  background: white;
-  margin: 0 auto;
-  width: 100%;
-  padding: 2rem;
+  border: 1px solid grey;
+  padding: 8px;
   list-style: none; }
 /**
  * #.# Common SCSS
@@ -79,11 +109,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -103,11 +144,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -127,11 +179,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -145,20 +208,29 @@
   color: #292929;
   margin: 0 auto;
   max-width: 740px;
-  padding: 2rem; }
-  .uk-card h2 {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.4); }
+  padding: 20px; }
 /**
  * #.# Common SCSS
  *
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -187,11 +259,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -208,11 +291,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -241,11 +335,22 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
 .directions {
   font-size: 14px;
   font-family: sans-serif;
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
 
 /**
  * #.# Editor Styles
@@ -256,3 +361,36 @@
 .uk-slideshow-item {
   border: 1px solid grey;
   padding: 8px; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+@font-face {
+  font-family: 'Open Sans';
+  src: url("https://fonts.googleapis.com/css?family=Roboto:100,300,500,700,900"); }
+
+p, h1, h2, h3, h4, h5, h6, div, button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
+
+.directions {
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.6); }
+
+.title {
+  font-weight: 900 !important; }
+
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.uk-modal {
+  background: rgba(209, 5, 182, 0.8);
+  border: 1px solid grey;
+  padding: 20px; }
